@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head> 
+<meta charset="UTF-8">
+<meta name="description" content="L'Historium est un générateur d'idées d'écriture créative spécialisé dans les environnements sensoriels. Tire au sort parmi des centaines de critères — couleurs, odeurs, textures, archétypes — pour des combinaisons uniques.">
+
+<meta name="keywords" content="générateur écriture créative, idées d'écriture, écriture sensorielle, exercice d'écriture, défi d'écriture, prompt écriture">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+</head> 
+
+<title>Historium — Générateur d'idées d'écriture sensorielle</title>
+    <style>
+      body {
+        background-color: #1a1a2e;
+        color: #e0d7f5;
+    font-family: 'Merriweather', serif;
+        text-align: center;
+        padding: 60px;
+      }
+
+      h1 {
+        font-size: 4.5em;
+        letter-spacing: 4px;
+font-family: 'Cinzel Decorative', serif;
+      }
+
+      p {
+        font-size: 1.8em;
+        letter-spacing: 1px;
+font-family: 'Merriweather', serif;
+      }
+
+p.intro {
+  font-size: 1.2em;
+  color: #a89bc2;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  line-height: 1.8em;
+ letter-spacing: 1px;
+font-family: 'Merriweather', serif;
+}
+   
+   .categories {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 30px; 
+row-gap: 10px;
+        margin-top: 80px; 
+margin-bottom: 80px
+      }
+
+      .categorie {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1.2em;
+font-family: 'Merriweather', serif;
+      }
+
+.coupure {
+  flex-basis: 100%;
+}
+
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #6b4fa0;
+      }
+
+      button {
+        background-color: #6b4fa0;
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-size: 1.2em;
+font-family: 'Merriweather', serif;
+        cursor: pointer;
+margin-bottom: 40px;
+      }
+
+#resultat {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.carte {
+  background-color: #2a2a4a;
+  border: 1px solid #6b4fa0;
+  border-radius: 12px;
+  padding: 20px 30px;
+  min-width: 180px;
+  max-width: 220px;
+  text-align: center;
+}
+
+.carte-label {
+  font-size: 1.4em;
+  color: #e0d7f5;
+  text-transform: uppercase;
+font-family: 'Cinzel Decorative', serif;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.carte-valeur {
+  font-size: 1.2em;
+  color: #e0d7f5;
+font-family: 'Merriweather', serif;
+  font-weight: bold;
+}
+
+.carte-couleur {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 10px auto 0 auto;
+  border: 2px solid #e0d7f5;
+}
+.vitrine {
+  margin-top: 100px;
+  padding: 50px 20px;
+  border-top: 1px solid #3a3a5a;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vitrine-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
+.vitrine-titre {
+  font-size: 2em;
+  letter-spacing: 3px;
+  color: #e0d7f5;
+  margin-bottom: 10px;
+font-family: 'Cinzel Decorative', serif;
+}
+
+.vitrine-accroche {
+  font-size: 1.2em;
+  color: #a89bc2;
+  margin-bottom: 40px;
+  line-height: 1.8em;
+font-family: 'Merriweather', serif;
+}
+
+.vitrine-offres {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.vitrine-offre {
+  background-color: #2a2a4a;
+  border: 1px solid #3a3a5a;
+  border-radius: 10px;
+  padding: 20px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.vitrine-offre-emoji {
+  font-size: 1.8em;
+  margin-bottom: 8px;
+}
+
+.vitrine-offre-nom {
+  font-size: 1.05em;
+  color: #e0d7f5;
+  margin-bottom: 6px;
+font-family: 'Merriweather', serif;
+}
+
+.vitrine-offre-tarif {
+  font-size: 1.05em;
+  color: #a89bc2;
+font-family: 'Merriweather', serif;
+}
+
+.vitrine-lien {
+  display: inline-block;
+  color: #c9a0dc;
+  text-decoration: none;
+  font-size: 1.2em;
+  border-bottom: 1px solid #6b4fa0;
+  padding-bottom: 3px;
+  transition: color 0.2s;
+font-family: 'Merriweather', serif;
+}
+
+.vitrine-lien:hover {
+  color: #e0d7f5;
+}
+    </style>
+  </head>
+  <body>
+    <h1>HISTORIUM</h1>
+    <p>Générateur d'univers créatifs sensoriels.</p>
+
+<p class="intro">Coche les catégories qui t'inspirent, lance le tirage,
+et laisse le hasard décider. Ce générateur est fait pour
+écrire, s'entraîner, se challenger - seul·e ou en groupe.</p>
+  
+  <div class="categories">
+
+      <div class="categorie">
+        <input type="checkbox" id="genre">
+        <label for="genre">Genre narratif</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="couleur">
+        <label for="couleur">Couleur</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="odeur">
+        <label for="odeur">Odeur</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="saveur">
+        <label for="saveur">Saveur</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="texture">
+        <label for="texture">Texture</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="objet">
+        <label for="objet">Objet</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="enjeu">
+        <label for="enjeu">Enjeu/Thème</label>
+      </div>
+<div class="coupure"></div>
+   <div class="categorie">
+        <input type="checkbox" id="archetype">
+        <label for="archetype">Archétype personnage</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="lieu">
+        <label for="lieu">Lieu/Décor</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="son">
+        <label for="son">Son</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="contrainte">
+        <label for="contrainte">Contrainte d’écriture</label>
+      </div>
+   <div class="categorie">
+        <input type="checkbox" id="epoque">
+        <label for="epoque">Epoque/Temporalité</label>
+      </div>
+
+      <!-- AJOUTE TES CATEGORIES ICI -->
+
+    </div>
+
+<button onclick="toutSelectionner()">Tout sélectionner / Désélectionner</button>
+
+    <button onclick="tirer()">Lancer le tirage</button>
+
+    <div id="resultat"></div>
+
+<section class="vitrine">
+  <img src="logo.png" alt="Logo Sens'Aurielle" class="vitrine-logo">
+  <h2 class="vitrine-titre">Sens'Aurielle</h2>
+  <p class="vitrine-accroche">Des histoires sensorielles personnalisées — audio, vidéo et animations immersives.</p>
+  <div class="vitrine-offres">
+    <div class="vitrine-offre">
+      <div class="vitrine-offre-emoji">🎧</div>
+      <div class="vitrine-offre-nom">Audio personnalisé</div>
+      <div class="vitrine-offre-tarif">À partir de 25€</div>
+    </div>
+    <div class="vitrine-offre">
+      <div class="vitrine-offre-emoji">🎬</div>
+      <div class="vitrine-offre-nom">Vidéo personnalisée</div>
+      <div class="vitrine-offre-tarif">À partir de 35€</div>
+    </div>
+    <div class="vitrine-offre">
+      <div class="vitrine-offre-emoji">🎁</div>
+      <div class="vitrine-offre-nom">Animations groupe</div>
+      <div class="vitrine-offre-tarif">250 – 400€</div>
+    </div>
+  </div>
+  <a href="https://histoires-sensorielles.fr" target="_blank" class="vitrine-lien">Découvrir Sens'Aurielle →</a>
+</section>
+    
+<script>
+      const listes = {
+        genre: ["Historique", "Voyage", "Autobiographique", "Merveilleux", "Comique", "Fantastique", "Réaliste", "Aventure", "Polar", "Horreur", "Dystopie", "Utopie", "Romance", "Tragédie", "Fable/Apologue", "Mythologique", "Épistolaire", "Conte philosophique", "Récit initiatique", "Horreur psychologique"],
+
+couleur: ["Abricot", "Acajou", "Aigue-marine", "Alezan", "Amande", "Amarante", "Ambre", "Améthyste", "Anthracite", "Aquilain", "Ardoise", "Argent", "Aubergine", "Auburn", "Aurore", "Avocat", "Azur", "Baillet", "Basané", "Beige", "Beurre", "Bis", "Bisque", "Bistre", "Bitume", "Blanc", "Blanc cassé", "Blanc lunaire", "Bleu", "Bleu acier", "Bleu barbeau", "Bleu canard", "Bleu charrette", "Bleu ciel", "Bleu céleste", "Bleu de cobalt", "Bleu de Prusse", "Bleu givré", "Bleu Majorelle", "Bleu marine", "Bleu nuit", "Bleu outremer", "Bleu paon", "Bleu persan", "Bleu pétrole", "Bleu roi", "Bleu turquin", "Bleu électrique", "Blond", "Blond vénitien", "Blé", "Bordeaux", "Bouton d'or", "Brique", "Bronze", "Brou de noix", "Brun", "Caca d'oie", "Cacao", "Cachou", "Café", "Café au lait", "Cannelle", "Capucine", "Caramel", "Carmin", "Carotte", "Chamois", "Chartreuse", "Chaudron", "Chocolat", "Cinabre", "Citrouille", "Coquille d'œuf", "Corail", "Cramoisi", "Crème", "Cuisse de nymphe", "Cuivre", "Cyan", "Cæruleum", "Flave", "Fraise", "Fraise écrasée", "Framboise", "Fuchsia", "Fumée", "Garance", "Glauque", "Glycine", "Grenadine", "Grenat", "Gris", "Gris acier", "Gris ardoise", "Gris de Payne", "Gris fer", "Gris perle", "Gris souris", "Groseille", "Grège", "Gueules", "Héliotrope", "Incarnat", "Indigo", "Indigo teinture", "Ivoire", "Jaune", "Jaune canari", "Jaune citron", "Jaune clair", "Jaune d'or", "Jaune de cobalt", "Jaune de Mars", "Jaune de Naples", "Jaune impérial", "Jaune mimosa", "Kaki", "Lapis-lazuli", "Lavallière", "Lavande", "Lie de vin", "Lilas", "Lime", "Lin", "Magenta", "Malachite", "Mandarine", "Marron", "Mastic", "Mauve", "Maïs", "Menthe", "Moutarde", "Nacarat", "Nankin", "Noir", "Noisette", "Ocre jaune", "Ocre rouge", "Olive", "Or", "Orange", "Orange brûlé", "Orchidée", "Orpiment", "Paille", "Parme", "Pelure d'oignon", "Pervenche", "Pistache", "Poil de chameau", "Ponceau", "Pourpre", "Pourpre moyen", "Prasin", "Prune", "Puce", "Rose", "Rose Mountbatten", "Rouge", "Rouge anglais", "Rouge cardinal", "Rouge cerise", "Rouge d'Andrinople", "Rouge de Falun", "Rouge feu", "Rouge indien", "Rouge sang", "Rouge tomette", "Rouille", "Rubis", "Sable", "Safre", "Sang de bœuf", "Sarcelle", "Saumon", "Sinople", "Smalt", "Soufre", "Sépia", "Tabac", "Taupe", "Terre d'ombre", "Tomate", "Topaze", "Tourterelle", "Turquoise", "Vanille", "Vermeil", "Vert", "Vert bouteille", "Vert céladon", "Vert d'eau", "Vert de chrome", "Vert de Hooker", "Vert de vessie", "Vert impérial", "Vert lichen", "Vert olive", "Vert perroquet", "Vert pomme", "Vert prairie", "Vert printemps", "Vert sapin", "Vert sauge", "Vert tilleul", "Vert Véronèse", "Vert épinard", "Vert-de-gris", "Vert-jaune", "Violet", "Violet d'évêque"],
+odeur: ["Fruitée", "Agrume", "Florale", "Mentholée", "Sucrée", "Fumée", "Boisée", "Chimique", "Rance et pourriture", "Térébenthine", "Encens", "Pluie sur terre sèche (pétrichor)", "Moisissure", "Sel marin", "Cire d’abeille", "Camphre", "Soufre", "Vieux papier", "Cuir", "Sang", "Lait chaud", "Résine de pin", "Café froid", "Urine", "Foin coupé", "Huile de moteur", "Roses fanées", "Poivre", "Vanille brûlée"],
+objet: ["Dé à coudre", "Lettre cachetée", "Montre arrêtée", "Peigne cassé", "Bouteille vide", "Lunettes sans verres", "Pièce de monnaie étrangère", "Carnet à moitié brûlé", "Bouton de nacre", "Photo déchirée", "Gant dépareillé", "Fiole vide", "Boîte à musique cassée", "Clé rouillée", "Miroir de poche brisé", "Bague sans pierre", "Boussole déréglée", "Flacon de parfum presque vide", "Carte postale sans adresse", "Ruban de soie noué", "Coquillage percé", "Dent de lait conservée", "Mèche de cheveux tressée", "Graine inconnue", "Ticket de train périmé", "Médaille militaire", "Sablier vide", "Plume d’oiseau rare", "Pierre polie percée d’un trou", "Carte à jouer isolée", "Fil rouge noué", "Poupée de chiffon sans visage", "Enveloppe cachetée à la cire", "Bougie noire intacte", "Ossement miniature", "Loupe sans manche", "Livre dont toutes les pages sont blanches", "Craie de couleur", "Bille en verre", "Nœud marin", "Fragment de vitrail", "Lacet de chaussure neuf", "Feuille séchée plastifiée", "Étiquette de bagage", "Dé à jouer chargé", "Capsule temporelle", "Épingle à chapeau", "Clochette de cheville", "Bandeau brodé", "Petite fiole de sable coloré", "Carte de visite d’un mort", "Bol ébréché", "Chandelle torsadée", "Sachet d’herbes séchées", "Figurine d’argile crue", "Bobine de fil noir", "Pince à linge peinte", "Caillou avec un visage dessiné dessus", "Pomme de pin laquée", "Petit cadenas sans clé"],
+saveur: ["Sucré", "Salé", "Acide", "Amer", "Umami", "Métallique", "Astringent", "Piquant", "Fade", "Fermenté", "Cendré", "Lacté", "Poivré", "Âpre"],
+texture: ["Velours", "Soie", "Coton", "Laine", "Fourrure", "Mousse", "Duvet", "Feutre", "Peau de pêche", "Satin", "Herbe", "Écorce", "Pierre ponce", "Jute", "Toile de lin brute", "Brique", "Corde tressée", "Parchemin", "Ardoise", "Roche calcaire", "Verre", "Métal poli", "Glace", "Porcelaine", "Argile crue", "Terre mouillée", "Feuille fraîche", "Algue", "Boue", "Sable fin", "Cendre", "Graines", "Gravier", "Sciure", "Épines", "Grillage", "Coquille brisée", "Cristaux", "Perles", "Caoutchouc", "Pâte à modeler", "Cire molle", "Résine fraîche", "Eau"],
+ enjeu: ["Amour", "Famille", "Guerre", "Justice", "Mort", "Perte", "Survie", "Pouvoir", "Rédemption", "Vengeance", "Bien contre le mal", "Mensonge", "Trahison", "Courage", "Amitié", "Jalousie", "Identité", "Exil et appartenance", "Mémoire et oubli", "Liberté", "Culpabilité", "Transmission", "Désir", "Foi et doute", "Folie", "Solitude", "Métamorphose", "Temps qui passe"],
+archetype: ["Le justicier / La justicière", "Le seigneur des ténèbres", "Le génie du mal", "Le caïd", "L’enfant-roi", "Le gardien du seuil", "La gardienne du feu", "Le savant fou", "Le détective", "L’oracle", "Le trickster (le trompeur)", "Le génie studieux", "L’agent secret", "La voix sans corps", "Le rebelle", "L’exilé / L’exilée", "Le paria", "La nomade", "L’enfant sauvage", "Le survivant / La survivante", "L’artiste maudit·e", "La tisserande / Le guérisseur", "La grand-mère / Le vieux sage", "Le médiateur / La médiatrice", "Le passeur (entre deux mondes)", "La bâtisseuse", "Le valet / La servante", "La femme fatale / L’homme fatal", "Le tueur en série", "La marâtre / Le tyran domestique", "La figure maternelle dévorante", "L’amoureux transi / L’amoureuse transie", "Le cynique désabusé·e", "La demoiselle en détresse / Le damoiseau perdu", "Le croyant aveugle", "L’avare", "Le fantôme (au sens figuré)", "La figure du deuil", "Le double", "Le goinfre", "Le touriste", "Le geek", "L’ivrogne", "Le sale gosse", "L’enfant gâté·e", "Le salarié", "Le commerçant", "L’enseignant", "L’élève", "Le parent", "L’enfant", "Le voisin", "Le collègue", "Le chef", "Le client", "Le serveur", "Le médecin", "L’infirmier", "Le patient", "Le technicien", "Le conducteur", "Le passager", "Le livreur", "Le gardien", "Le visiteur", "L’artisan", "Le vendeur", "L’agent administratif", "Le bibliothécaire", "Le policier", "Le juge", "L’avocat", "Le chercheur", "Le journaliste", "Le musicien", "L’artiste", "Le sportif", "Le retraité", "Le propriétaire", "Le locataire", "Le fonctionnaire", "Le stagiaire", "Le touriste", "Le guide", "Le traducteur", "Le cuisinier", "Le jardinier", "Le chauffeur", "Le réceptionniste", "Le mécanicien", "Le pharmacien", "Le comptable", "L’ingénieur", "Le développeur"],
+lieu: ["Océan / mer", "Rivière", "Moulin", "Château", "Ruine", "Grotte", "Volcan", "Montagne", "Souterrain", "Immeuble", "Appartement", "Maison", "Rue", "Quartier résidentiel", "Jardin", "Parc public", "Supermarché", "Parking", "École", "Bureau", "Café", "Restaurant", "Forêt", "Champ", "Lac", "Marais", "Désert", "Toundra", "Archipel", "Terrier", "Grenier", "Bibliothèque abandonnée", "Bibliothèque municipale", "Hospice", "Hôpital", "Foire", "Port", "Gare", "Station de métro", "Mine", "Banlieue", "Centre-ville", "Cimetière", "Phare", "Train en marche", "Île artificielle", "Espace (cosmos)", "Marché nocturne", "Marché de jour", "Laboratoire", "Crypte", "Ferme isolée"],
+contrainte: ["Lipogramme en E — Écris sans utiliser une seule fois la lettre ‘e’", "Abécédaire — Chaque phrase commence par une lettre de l’alphabet, dans l’ordre de A à Z", "Monoparagraphe — Le texte entier ne forme qu’un seul paragraphe sans retour à la ligne", "Tu — Le récit est écrit entièrement à la deuxième personne du singulier", "Temps suspendu — Toute l’action se déroule en moins d’une minute réelle racontée au ralenti", "Sans dialogue — Aucune parole prononcée, même rapportée, tout passe par le corps les gestes et les sensations", "Sans verbe d’action — Interdiction d’utiliser des verbes d’action seuls les verbes d’état sont autorisés", "Dernière phrase en premier — Écris la fin en première phrase puis remonte vers elle", "Trois objets pas un de plus — Le texte ne mentionne que trois objets physiques au total choisis avec soin", "Champ lexical unique — Tout le texte doit utiliser un seul champ lexical dominant y compris pour les métaphores", "Sans adjectif — Aucun adjectif qualificatif n’est autorisé la description passe uniquement par les verbes et les noms", "Récit en liste — Le texte est entièrement structuré en liste numérotée ou à puces", "Voix passive exclusive — Toutes les actions sont formulées à la voix passive", "Présent de narration strict — Tout au présent y compris les souvenirs et les anticipations", "100 mots exactement — Le texte fait exactement cent mots ni plus ni moins", "Phrase unique — Le texte entier ne forme qu’une seule phrase grammaticalement correcte", "Sens interdit — Un des cinq sens est totalement banni du texte ni évocation ni métaphore ni référence", "Le personnage n’a pas de nom — Aucun nom propre aucun pronom personnel ne désigne le personnage principal", "Palindrome structurel — La deuxième moitié du texte est le miroir thématique de la première", "Écriture automatique minutée — Le texte doit être écrit sans relecture ni correction en un temps imparti"],
+epoque: ["Préhistoire", "Antiquité", "Moyen-Âge", "Renaissance", "XIXe siècle", "Contemporain", "Futur proche", "Futur lointain", "Temps indéfini / mythique"],
+son: ["Pluie", "Orage", "Vent", "Feuilles qui bruissent", "Pas dans la neige", "Pas sur du gravier", "Craquement du bois", "Feu qui crépite", "Goutte d’eau qui tombe", "Ruisseau qui coule", "Vagues", "Bulles dans l’eau", "Respiration lente", "Respiration irrégulière", "Chuchotement", "Voix étouffée derrière une porte", "Rire lointain", "Battement de cœur", "Horloge", "Grincement de porte", "Clé dans une serrure", "Objet métallique qui tombe", "Chaîne qui traîne", "Papier qu’on froisse", "Pages qu’on tourne", "Frottement de crayon sur le papier", "Cliquetis de stylo", "Touches de clavier", "Notification électronique", "Grésillement radio", "Télévision en fond", "Silence pesant", "Écho dans une pièce vide", "Pas dans un couloir", "Ascenseur", "Train", "Moteur", "Freinage brusque", "Cloche lointaine", "Carillon", "Chant d’oiseau", "Cri d’animal", "Insectes nocturnes", "Fer à repasser", "Tissu qui se déchire", "Drap qu’on secoue", "Doigts qui tapotent", "Grattement", "Plat qui mijote", "Bouteille qu’on débouche", "Glace qui craque", "Allumette qu’on gratte", "Balai qui frotte le sol", "Tintement de monnaie"]
+ 
+
+      };
+
+ const emojis = {
+  genre: "📖",
+  couleur: "🎨",
+  odeur: "👃",
+  texture: "🤲",
+  son: "👂",
+  saveur: "👅",
+  objet: "🔮",
+  theme: "💡",
+  archetype: "🎭",
+  lieu: "🗺️",
+  epoque: "⏳",
+  contrainte: "✍️"
+};
+
+const couleursHex = {
+  "Abricot": "#e67e30", "Acajou": "#88421d", "Aigue-marine": "#79f8f8",
+  "Alezan": "#a76726", "Amande": "#82c46c", "Amarante": "#91283b",
+  "Ambre": "#f0c300", "Améthyste": "#884da7", "Anthracite": "#303030",
+  "Aquilain": "#ad4f09", "Ardoise": "#5a5e6b", "Argent": "#c0c0c0",
+  "Aubergine": "#370028", "Auburn": "#9d3e0c", "Aurore": "#ffcb60",
+  "Avocat": "#568203", "Azur": "#007fff", "Baillet": "#ae642d",
+  "Basané": "#8b6c42", "Beige": "#c8ad7f", "Beurre": "#f0e36b",
+  "Bis": "#766f64", "Bisque": "#ffe4c4", "Bistre": "#856d4d",
+  "Bitume": "#4e3d28", "Blanc": "#ffffff", "Blanc cassé": "#fefee2",
+  "Blanc lunaire": "#f4fefe", "Bleu": "#0080ff", "Bleu acier": "#3a8eba",
+  "Bleu barbeau": "#5472ae", "Bleu canard": "#048b9a", "Bleu charrette": "#8ea2c6",
+  "Bleu ciel": "#77b5fe", "Bleu céleste": "#26c4ec", "Bleu de cobalt": "#22427c",
+  "Bleu de Prusse": "#24445c", "Bleu givré": "#80d0d0", "Bleu Majorelle": "#6050dc",
+  "Bleu marine": "#03224c", "Bleu nuit": "#0f056b", "Bleu outremer": "#1b019b",
+  "Bleu paon": "#067790", "Bleu persan": "#6600ff", "Bleu pétrole": "#1d4851",
+  "Bleu roi": "#318ce7", "Bleu turquin": "#425b8a", "Bleu électrique": "#2c75ff",
+  "Blond": "#e2bc74", "Blond vénitien": "#e7a854", "Blé": "#e8d630",
+  "Bordeaux": "#6d071a", "Bouton d'or": "#fcdc12", "Brique": "#842e1b",
+  "Bronze": "#614e1a", "Brou de noix": "#3f2204", "Brun": "#5b3c11",
+  "Caca d'oie": "#cdcd0d", "Cacao": "#614b3a", "Cachou": "#2f1b0c",
+  "Café": "#462e01", "Café au lait": "#785e2f", "Cannelle": "#7e5835",
+  "Capucine": "#ff5e4d", "Caramel": "#7e3300", "Carmin": "#960018",
+  "Carotte": "#f4661b", "Chamois": "#d0c07a", "Chartreuse": "#7fff00",
+  "Chaudron": "#85530f", "Chocolat": "#5a3a22", "Cinabre": "#db1702",
+  "Citrouille": "#df6d14", "Coquille d'œuf": "#fde9e0", "Corail": "#e73e01",
+  "Cramoisi": "#dc143c", "Crème": "#fdf1b8", "Cuisse de nymphe": "#fee7f0",
+  "Cuivre": "#b36700", "Cyan": "#2bfafa", "Cæruleum": "#357ab7",
+  "Flave": "#e6e697", "Fraise": "#bf3030", "Fraise écrasée": "#a42424",
+  "Framboise": "#c72c48", "Fuchsia": "#fd3f92", "Fumée": "#bbd2e1",
+  "Garance": "#ee1010", "Glauque": "#649b88", "Glycine": "#c9a0dc",
+  "Grenadine": "#e9383f", "Grenat": "#6e0b14", "Gris": "#606060",
+  "Gris acier": "#afafaf", "Gris ardoise": "#708090", "Gris de Payne": "#677179",
+  "Gris fer": "#7f7f7f", "Gris perle": "#cecece", "Gris souris": "#9e9e9e",
+  "Groseille": "#cf0a1d", "Grège": "#bbae98", "Gueules": "#e21313",
+  "Héliotrope": "#df73ff", "Incarnat": "#ff6f7d", "Indigo": "#791cf8",
+  "Indigo teinture": "#2e006c", "Ivoire": "#ffffd4", "Jaune": "#ffff00",
+  "Jaune canari": "#e7f00d", "Jaune citron": "#f7ff3c", "Jaune clair": "#ffffe0",
+  "Jaune d'or": "#efd807", "Jaune de cobalt": "#fdee00", "Jaune de Mars": "#eed153",
+  "Jaune de Naples": "#fff0bc", "Jaune impérial": "#ffe436", "Jaune mimosa": "#fef86c",
+  "Kaki": "#94812b", "Lapis-lazuli": "#26619c", "Lavallière": "#8f5922",
+  "Lavande": "#9683ec", "Lie de vin": "#ac1e44", "Lilas": "#b666d2",
+  "Lime": "#9efd38", "Lin": "#faf0e6", "Magenta": "#8b008b",
+  "Malachite": "#1fa055", "Mandarine": "#fea347", "Marron": "#582900",
+  "Mastic": "#b3b191", "Mauve": "#d473d4", "Maïs": "#ffde75",
+  "Menthe": "#16b84e", "Moutarde": "#c7cf00", "Nacarat": "#fc5d5d",
+  "Nankin": "#f7e269", "Noir": "#000000", "Noisette": "#955628",
+  "Ocre jaune": "#dfaf2c", "Ocre rouge": "#dd985c", "Olive": "#708d23",
+  "Or": "#ffd700", "Orange": "#ff7f00", "Orange brûlé": "#cc5500",
+  "Orchidée": "#da70d6", "Orpiment": "#fcd21c", "Paille": "#fee347",
+  "Parme": "#cfa0e9", "Pelure d'oignon": "#d58490", "Pervenche": "#ccccff",
+  "Pistache": "#bef574", "Poil de chameau": "#b67823", "Ponceau": "#c60800",
+  "Pourpre": "#9e0e40", "Pourpre moyen": "#9370db", "Prasin": "#4ca66b",
+  "Prune": "#811453", "Puce": "#4e1609", "Rose": "#fd6c9e",
+  "Rose Mountbatten": "#997a8d", "Rouge": "#f00020", "Rouge anglais": "#f7230c",
+  "Rouge cardinal": "#b82010", "Rouge cerise": "#bb0b0b", "Rouge d'Andrinople": "#a91101",
+  "Rouge de Falun": "#801818", "Rouge feu": "#ff4901", "Rouge indien": "#cd5c5c",
+  "Rouge sang": "#850606", "Rouge tomette": "#ae4a34", "Rouille": "#985717",
+  "Rubis": "#e0115f", "Sable": "#e0cda9", "Safre": "#0131b4",
+  "Sang de bœuf": "#730800", "Sarcelle": "#008080", "Saumon": "#f88e55",
+  "Sinople": "#149414", "Smalt": "#003399", "Soufre": "#ffff6b",
+  "Sépia": "#ae8964", "Tabac": "#9f551e", "Taupe": "#463f32",
+  "Terre d'ombre": "#926d27", "Tomate": "#de2916", "Topaze": "#faea73",
+  "Tourterelle": "#bbacac", "Turquoise": "#25fde9", "Vanille": "#e1ce9a",
+  "Vermeil": "#ff0921", "Vert": "#008020", "Vert bouteille": "#096a09",
+  "Vert céladon": "#83a697", "Vert d'eau": "#b0f2b6", "Vert de chrome": "#18391e",
+  "Vert de Hooker": "#1b4f08", "Vert de vessie": "#22780f", "Vert impérial": "#00561b",
+  "Vert lichen": "#85c17e", "Vert olive": "#556b2f", "Vert perroquet": "#3af24b",
+  "Vert pomme": "#34c924", "Vert prairie": "#57d53b", "Vert printemps": "#00ff7f",
+  "Vert sapin": "#095228", "Vert sauge": "#689d71", "Vert tilleul": "#a5d152",
+  "Vert Véronèse": "#5a6521", "Vert épinard": "#175732", "Vert-de-gris": "#95a595",
+  "Vert-jaune": "#adff2f", "Violet": "#7f00ff", "Violet d'évêque": "#723e64"
+};
+
+function tirer() {
+  const resultat = document.getElementById("resultat");
+  resultat.innerHTML = "";
+
+  let auMoinsUne = false;
+
+  for (const cat in listes) {
+    if (document.getElementById(cat).checked) {
+      auMoinsUne = true;
+      const valeur = tirerAuSort(listes[cat]);
+      const emoji = emojis[cat] || "";
+
+      const carte = document.createElement("div");
+      carte.className = "carte";
+
+      carte.innerHTML = `
+        <div class="carte-label">${emoji} ${cat}</div>
+        <div class="carte-valeur">${valeur}</div>
+        ${cat === "couleur" && couleursHex[valeur]
+          ? `<div class="carte-couleur" style="background-color: ${couleursHex[valeur]}"></div>`
+          : ""}
+      `;
+
+      resultat.appendChild(carte);
+    }
+  }
+
+  if (!auMoinsUne) {
+    resultat.innerHTML = "Coche au moins une catégorie !";
+  }
+}
+      function tirerAuSort(liste) {
+        const index = Math.floor(Math.random() * liste.length);
+        return liste[index];
+      }
+function toutSelectionner() {
+  const cases = Object.keys(listes);
+  const toutCoche = cases.every(cat => document.getElementById(cat).checked);
+
+  cases.forEach(cat => {
+    document.getElementById(cat).checked = !toutCoche;
+  });
+}
+    </script>
+  </body>
+</html>
